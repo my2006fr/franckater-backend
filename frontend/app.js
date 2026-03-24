@@ -1,5 +1,5 @@
 // ── Config ────────────────────────────────────────────────
-const API_BASE = "https://franckate-api.onrender.com/api";
+const API_BASE = "https://franckater-backend.onrender.com/api";
 // For local dev, change to: const API_BASE = "http://127.0.0.1:5000/api";
 
 let currentMode = "encrypt";
