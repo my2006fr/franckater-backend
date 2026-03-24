@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: franckate-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers=2 --bind=0.0.0.0:$PORT --timeout=60
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: franckate-db
+          property: connectionString
+
+databases:
+  - name: franckate-db
+    plan: free

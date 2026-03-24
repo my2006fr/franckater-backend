@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Franckate Cipher API — Cryptography for Everyone</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">FRANCKATE<span class="logo-dot">.</span></a>
+      <div class="nav-links">
+        <a href="#docs">Docs</a>
+        <a href="#playground">Playground</a>
+        <a href="#register">Get API Key</a>
+        <a href="#learn">Learn</a>
+      </div>
+      <button class="nav-key-btn" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
+        Get Free Key →
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Open Cipher API · Free for Students</div>
+      <h1 class="hero-title">Encrypt anything.<br><span class="hero-accent">Learn everything.</span></h1>
+      <p class="hero-sub">
+        The Franckate Cipher API turns any text into a structured ciphertext you can decode by hand.
+        Perfect for learning cryptography — one API call shows you exactly how it works.
+      </p>
+      <div class="hero-demo">
+        <div class="demo-input">
+          <span class="demo-label">plaintext</span>
+          <span class="demo-text" id="hero-plain">Hello</span>
+        </div>
+        <div class="demo-arrow">→</div>
+        <div class="demo-output">
+          <span class="demo-label">franckated</span>
+          <span class="demo-text mono" id="hero-cipher">U7.L4.L11.L11.L14.</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('playground').scrollIntoView({behavior:'smooth'})">
+          Try it live →
+        </button>
+        <button class="btn-ghost" onclick="document.getElementById('docs').scrollIntoView({behavior:'smooth'})">
+          Read the docs
+        </button>
+      </div>
+    </div>
+    <div class="hero-code-panel">
+      <div class="code-window">
+        <div class="code-bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="code-bar-title">quickstart.py</span>
+        </div>
+        <pre class="code-body"><span class="kw">import</span> requests
+
+API_KEY <span class="op">=</span> <span class="str">"your_api_key_here"</span>
+BASE    <span class="op">=</span> <span class="str">"https://franckate-api.onrender.com/api"</span>
+
+<span class="co"># Encrypt</span>
+res <span class="op">=</span> requests.post(
+    f<span class="str">"{BASE}/encrypt"</span>,
+    headers<span class="op">=</span>{<span class="str">"X-API-Key"</span>: API_KEY},
+    json<span class="op">=</span>{<span class="str">"text"</span>: <span class="str">"Hello World"</span>}
+)
+
+data <span class="op">=</span> res.json()
+<span class="kw">print</span>(data[<span class="str">"encrypted"</span>])
+<span class="co"># → U7.L4.L11.L11.L14.F27.U22.L14.L17.L11.L3.</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section" id="learn">
+    <div class="section-inner">
+      <h2 class="section-title">How the cipher works</h2>
+      <p class="section-sub">Franckate is a substitution cipher. Every character maps to a category prefix + its position in that category. Dot-separated. Human-readable. Teachable.</p>
+      <div class="categories-grid">
+        <div class="cat-card cat-u">
+          <div class="cat-code">U</div>
+          <div class="cat-name">Uppercase</div>
+          <div class="cat-example">A → U0. · B → U1. · Z → U25.</div>
+        </div>
+        <div class="cat-card cat-l">
+          <div class="cat-code">L</div>
+          <div class="cat-name">Lowercase</div>
+          <div class="cat-example">a → L0. · e → L4. · z → L25.</div>
+        </div>
+        <div class="cat-card cat-d">
+          <div class="cat-code">D</div>
+          <div class="cat-name">Digits</div>
+          <div class="cat-example">0 → D0. · 5 → D5. · 9 → D9.</div>
+        </div>
+        <div class="cat-card cat-f">
+          <div class="cat-code">F</div>
+          <div class="cat-name">Symbols &amp; Space</div>
+          <div class="cat-example">! → F0. · space → F27. · ? → F22.</div>
+        </div>
+      </div>
+      <div class="decode-demo">
+        <div class="decode-title">Decode this by hand</div>
+        <div class="decode-cipher mono">U7.L4.L11.L11.L14.F27.F22.</div>
+        <details class="decode-reveal">
+          <summary>Show answer</summary>
+          <div class="decode-answer">
+            U7 = H · L4 = e · L11 = l · L11 = l · L14 = o · F27 = (space) · F22 = ?<br>
+            <strong>→ "Hello ?"</strong>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- API Docs -->
+  <section class="section dark-section" id="docs">
+    <div class="section-inner">
+      <h2 class="section-title">API Reference</h2>
+      <p class="section-sub">All endpoints accept JSON bodies and return JSON. Authenticate with your API key in the <code>X-API-Key</code> header.</p>
+
+      <div class="base-url-bar">
+        <span class="base-label">Base URL</span>
+        <span class="base-url mono" id="base-url-display">https://franckate-api.onrender.com</span>
+        <button class="copy-btn" onclick="copyText('https://franckate-api.onrender.com', this)">Copy</button>
+      </div>
+
+      <!-- Endpoints -->
+      <div class="endpoint-list">
+
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path mono">/api/encrypt</span>
+            <span class="auth-badge">🔑 API Key</span>
+          </div>
+          <p class="endpoint-desc">Encrypt any plaintext string using the Franckate cipher.</p>
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab(this,'enc-req')">Request</button>
+            <button class="tab" onclick="switchTab(this,'enc-res')">Response</button>
+            <button class="tab" onclick="switchTab(this,'enc-curl')">curl</button>
+            <button class="tab" onclick="switchTab(this,'enc-py')">Python</button>
+            <button class="tab" onclick="switchTab(this,'enc-js')">JavaScript</button>
+          </div>
+          <div class="tab-panel active" id="enc-req">
+            <pre class="code-block">{
+  <span class="key">"text"</span>: <span class="str">"Hello World"</span>
+}</pre>
+            <table class="params-table">
+              <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+              <tr><td class="mono">text</td><td>string</td><td>Yes</td><td>Plaintext to encrypt (max 10,000 chars)</td></tr>
+            </table>
+          </div>
+          <div class="tab-panel" id="enc-res">
+            <pre class="code-block">{
+  <span class="key">"original"</span>:  <span class="str">"Hello World"</span>,
+  <span class="key">"encrypted"</span>: <span class="str">"U7.L4.L11.L11.L14.F27.U22.L14.L17.L11.L3."</span>,
+  <span class="key">"length"</span>: {
+    <span class="key">"input"</span>:  <span class="num">11</span>,
+    <span class="key">"output"</span>: <span class="num">42</span>
+  },
+  <span class="key">"algorithm"</span>: <span class="str">"franckate-v1"</span>
+}</pre>
+          </div>
+          <div class="tab-panel" id="enc-curl">
+            <pre class="code-block">curl -X POST https://franckate-api.onrender.com/api/encrypt \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -H <span class="str">"X-API-Key: YOUR_API_KEY"</span> \
+  -d <span class="str">'{"text": "Hello World"}'</span></pre>
+          </div>
+          <div class="tab-panel" id="enc-py">
+            <pre class="code-block"><span class="kw">import</span> requests
+
+response = requests.post(
+    <span class="str">"https://franckate-api.onrender.com/api/encrypt"</span>,
+    headers={<span class="str">"X-API-Key"</span>: <span class="str">"YOUR_API_KEY"</span>},
+    json={<span class="str">"text"</span>: <span class="str">"Hello World"</span>}
+)
+data = response.json()
+<span class="kw">print</span>(data[<span class="str">"encrypted"</span>])</pre>
+          </div>
+          <div class="tab-panel" id="enc-js">
+            <pre class="code-block"><span class="kw">const</span> response = <span class="kw">await</span> fetch(
+  <span class="str">"https://franckate-api.onrender.com/api/encrypt"</span>,
+  {
+    method: <span class="str">"POST"</span>,
+    headers: {
+      <span class="str">"Content-Type"</span>: <span class="str">"application/json"</span>,
+      <span class="str">"X-API-Key"</span>: <span class="str">"YOUR_API_KEY"</span>
+    },
+    body: JSON.stringify({ text: <span class="str">"Hello World"</span> })
+  }
+);
+<span class="kw">const</span> data = <span class="kw">await</span> response.json();
+console.log(data.encrypted);</pre>
+          </div>
+        </div>
+
+        <!-- Decrypt -->
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path mono">/api/decrypt</span>
+            <span class="auth-badge">🔑 API Key</span>
+          </div>
+          <p class="endpoint-desc">Decrypt Franckate ciphertext back to plaintext.</p>
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab(this,'dec-req')">Request</button>
+            <button class="tab" onclick="switchTab(this,'dec-res')">Response</button>
+            <button class="tab" onclick="switchTab(this,'dec-curl')">curl</button>
+          </div>
+          <div class="tab-panel active" id="dec-req">
+            <pre class="code-block">{
+  <span class="key">"text"</span>: <span class="str">"U7.L4.L11.L11.L14."</span>
+}</pre>
+          </div>
+          <div class="tab-panel" id="dec-res">
+            <pre class="code-block">{
+  <span class="key">"original"</span>:  <span class="str">"U7.L4.L11.L11.L14."</span>,
+  <span class="key">"decrypted"</span>: <span class="str">"Hello"</span>,
+  <span class="key">"algorithm"</span>: <span class="str">"franckate-v1"</span>
+}</pre>
+          </div>
+          <div class="tab-panel" id="dec-curl">
+            <pre class="code-block">curl -X POST https://franckate-api.onrender.com/api/decrypt \
+  -H <span class="str">"Content-Type: application/json"</span> \
+  -H <span class="str">"X-API-Key: YOUR_API_KEY"</span> \
+  -d <span class="str">'{"text": "U7.L4.L11.L11.L14."}'</span></pre>
+          </div>
+        </div>
+
+        <!-- Steps -->
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path mono">/api/encrypt/steps</span>
+            <span class="auth-badge">🔑 API Key</span>
+            <span class="new-badge">Educational</span>
+          </div>
+          <p class="endpoint-desc">Returns a character-by-character breakdown of the encryption process. Perfect for building cryptography tutorials.</p>
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab(this,'steps-res')">Response</button>
+          </div>
+          <div class="tab-panel active" id="steps-res">
+            <pre class="code-block">{
+  <span class="key">"original"</span>:  <span class="str">"Hi"</span>,
+  <span class="key">"encrypted"</span>: <span class="str">"U7.L8."</span>,
+  <span class="key">"total_steps"</span>: <span class="num">2</span>,
+  <span class="key">"steps"</span>: [
+    {
+      <span class="key">"position"</span>:            <span class="num">0</span>,
+      <span class="key">"character"</span>:           <span class="str">"H"</span>,
+      <span class="key">"category"</span>:            <span class="str">"uppercase"</span>,
+      <span class="key">"category_code"</span>:       <span class="str">"U"</span>,
+      <span class="key">"index_in_category"</span>:   <span class="num">7</span>,
+      <span class="key">"token"</span>:               <span class="str">"U7."</span>,
+      <span class="key">"explanation"</span>:  <span class="str">"'H' is uppercase at index 7 → 'U7.'"</span>
+    },
+    ...
+  ]
+}</pre>
+          </div>
+        </div>
+
+        <!-- Batch -->
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path mono">/api/batch/encrypt</span>
+            <span class="auth-badge">🔑 API Key</span>
+          </div>
+          <p class="endpoint-desc">Encrypt up to 50 strings in a single request.</p>
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab(this,'batch-req')">Request</button>
+            <button class="tab" onclick="switchTab(this,'batch-res')">Response</button>
+          </div>
+          <div class="tab-panel active" id="batch-req">
+            <pre class="code-block">{
+  <span class="key">"texts"</span>: [<span class="str">"Hello"</span>, <span class="str">"World"</span>, <span class="str">"Crypto"</span>]
+}</pre>
+          </div>
+          <div class="tab-panel" id="batch-res">
+            <pre class="code-block">{
+  <span class="key">"count"</span>: <span class="num">3</span>,
+  <span class="key">"algorithm"</span>: <span class="str">"franckate-v1"</span>,
+  <span class="key">"results"</span>: [
+    { <span class="key">"index"</span>: <span class="num">0</span>, <span class="key">"original"</span>: <span class="str">"Hello"</span>, <span class="key">"encrypted"</span>: <span class="str">"U7.L4.L11.L11.L14."</span> },
+    { <span class="key">"index"</span>: <span class="num">1</span>, <span class="key">"original"</span>: <span class="str">"World"</span>, <span class="key">"encrypted"</span>: <span class="str">"U22.L14.L17.L11.L3."</span> },
+    { <span class="key">"index"</span>: <span class="num">2</span>, <span class="key">"original"</span>: <span class="str">"Crypto"</span>, <span class="key">"encrypted"</span>: <span class="str">"U2.L17.L24.L15.L19.L14."</span> }
+  ]
+}</pre>
+          </div>
+        </div>
+
+        <!-- Analyze -->
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path mono">/api/analyze</span>
+            <span class="auth-badge">🔑 API Key</span>
+          </div>
+          <p class="endpoint-desc">Analyze the character distribution of a text before encrypting — great for understanding cipher expansion ratios.</p>
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab(this,'analyze-res')">Response</button>
+          </div>
+          <div class="tab-panel active" id="analyze-res">
+            <pre class="code-block">{
+  <span class="key">"analysis"</span>: {
+    <span class="key">"length"</span>: <span class="num">11</span>,
+    <span class="key">"unique_characters"</span>: <span class="num">8</span>,
+    <span class="key">"counts"</span>: { <span class="key">"uppercase"</span>: <span class="num">2</span>, <span class="key">"lowercase"</span>: <span class="num">8</span>, <span class="key">"digits"</span>: <span class="num">0</span>, <span class="key">"special"</span>: <span class="num">1</span> },
+    <span class="key">"percentages"</span>: { <span class="key">"uppercase"</span>: <span class="num">18.2</span>, <span class="key">"lowercase"</span>: <span class="num">72.7</span>, ... }
+  }
+}</pre>
+          </div>
+        </div>
+
+        <!-- Public endpoints -->
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path mono">/api/info</span>
+            <span class="public-badge">Public</span>
+          </div>
+          <p class="endpoint-desc">Returns API metadata — no key required. Good for discovery and health checks.</p>
+        </div>
+
+      </div>
+
+      <!-- Error codes -->
+      <h3 class="subsection-title">Error codes</h3>
+      <table class="error-table">
+        <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">400</td><td>Missing or invalid request body</td></tr>
+          <tr><td class="mono">401</td><td>No API key provided</td></tr>
+          <tr><td class="mono">403</td><td>Invalid or inactive API key</td></tr>
+          <tr><td class="mono">409</td><td>Email already registered</td></tr>
+          <tr><td class="mono">413</td><td>Input too long</td></tr>
+          <tr><td class="mono">422</td><td>Decryption failed — invalid ciphertext format</td></tr>
+          <tr><td class="mono">429</td><td>Rate limit exceeded</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Playground -->
+  <section class="section" id="playground">
+    <div class="section-inner">
+      <h2 class="section-title">Live Playground</h2>
+      <p class="section-sub">Test the API directly — paste your API key below and start encrypting.</p>
+
+      <div class="playground-key-row">
+        <input type="text" id="pg-api-key" placeholder="Paste your API key here..." class="key-input" />
+        <span class="key-status" id="key-status"></span>
+      </div>
+
+      <div class="playground-grid">
+        <!-- Encrypt panel -->
+        <div class="pg-panel">
+          <div class="pg-panel-header">
+            <span class="pg-mode active" id="pg-mode-enc" onclick="setPgMode('encrypt')">Encrypt</span>
+            <span class="pg-mode" id="pg-mode-dec" onclick="setPgMode('decrypt')">Decrypt</span>
+            <span class="pg-mode" id="pg-mode-steps" onclick="setPgMode('steps')">Steps</span>
+            <span class="pg-mode" id="pg-mode-batch" onclick="setPgMode('batch')">Batch</span>
+          </div>
+          <textarea id="pg-input" class="pg-textarea" placeholder="Type something to encrypt..."></textarea>
+          <div class="pg-actions">
+            <button class="btn-primary" onclick="runPlayground()" id="pg-run-btn">Run →</button>
+            <button class="btn-ghost" onclick="clearPlayground()">Clear</button>
+            <span class="pg-char-count" id="pg-char-count">0 chars</span>
+          </div>
+          <div class="pg-hint" id="pg-hint">Enter your API key above to start</div>
+        </div>
+
+        <!-- Output panel -->
+        <div class="pg-panel">
+          <div class="pg-panel-header">
+            <span class="pg-panel-title">Output</span>
+            <button class="copy-btn-sm" onclick="copyOutput()" id="copy-output-btn" style="display:none">Copy</button>
+          </div>
+          <div id="pg-output" class="pg-output">
+            <div class="pg-output-placeholder">Results will appear here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Register -->
+  <section class="section register-section" id="register">
+    <div class="section-inner narrow">
+      <h2 class="section-title">Get your API key</h2>
+      <p class="section-sub">Free for students, educators, and hobbyists. No credit card needed.</p>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('register')">Register</button>
+        <button class="auth-tab" onclick="switchAuthTab('login')">Login</button>
+      </div>
+
+      <div id="register-form" class="auth-form">
+        <input type="text" id="reg-name" placeholder="Your name" class="form-input" />
+        <input type="email" id="reg-email" placeholder="Email address" class="form-input" />
+        <input type="password" id="reg-password" placeholder="Password (min 8 chars)" class="form-input" />
+        <button class="btn-primary full-width" onclick="doRegister()">Create account →</button>
+        <div class="form-feedback" id="reg-feedback"></div>
+      </div>
+
+      <div id="login-form" class="auth-form" style="display:none">
+        <input type="email" id="login-email" placeholder="Email address" class="form-input" />
+        <input type="password" id="login-password" placeholder="Password" class="form-input" />
+        <button class="btn-primary full-width" onclick="doLogin()">Login →</button>
+        <div class="form-feedback" id="login-feedback"></div>
+      </div>
+
+      <!-- API key display -->
+      <div id="key-display" class="key-display" style="display:none">
+        <div class="key-display-header">🎉 Your API Key</div>
+        <div class="key-display-key mono" id="display-key"></div>
+        <div class="key-display-warning">⚠️ Copy this now — it won't be shown again</div>
+        <button class="btn-primary" onclick="copyKey()">Copy key</button>
+        <button class="btn-ghost" onclick="goToPlayground()">Go to playground →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rate limits -->
+  <section class="section limits-section">
+    <div class="section-inner">
+      <h2 class="section-title">Rate limits</h2>
+      <div class="limits-grid">
+        <div class="limit-card">
+          <div class="limit-num">500</div>
+          <div class="limit-label">encrypt/decrypt per hour</div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-num">100</div>
+          <div class="limit-label">batch requests per hour</div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-num">200</div>
+          <div class="limit-label">steps/analyze per hour</div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-num">10k</div>
+          <div class="limit-label">max chars per request</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">FRANCKATE<span class="logo-dot">.</span></div>
+      <div class="footer-links">
+        <a href="#docs">Docs</a>
+        <a href="#playground">Playground</a>
+        <a href="#register">API Key</a>
+      </div>
+      <div class="footer-credit">
+        Algorithm by Franck · Built for cryptography learners everywhere
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
