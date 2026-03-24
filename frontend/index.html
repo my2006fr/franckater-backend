@@ -129,7 +129,7 @@ data <span class="op">=</span> res.json()
 
       <div class="base-url-bar">
         <span class="base-label">Base URL</span>
-        <span class="base-url mono" id="base-url-display">https://franckate-api.onrender.com</span>
+        <span class="base-url mono" id="base-url-display">https://franckater-api.onrender.com</span>
         <button class="copy-btn" onclick="copyText('https://franckate-api.onrender.com', this)">Copy</button>
       </div>
 
@@ -171,7 +171,7 @@ data <span class="op">=</span> res.json()
 }</pre>
           </div>
           <div class="tab-panel" id="enc-curl">
-            <pre class="code-block">curl -X POST https://franckate-api.onrender.com/api/encrypt \
+            <pre class="code-block">curl -X POST https://franckater-api.onrender.com/api/encrypt \
   -H <span class="str">"Content-Type: application/json"</span> \
   -H <span class="str">"X-API-Key: YOUR_API_KEY"</span> \
   -d <span class="str">'{"text": "Hello World"}'</span></pre>
@@ -180,7 +180,7 @@ data <span class="op">=</span> res.json()
             <pre class="code-block"><span class="kw">import</span> requests
 
 response = requests.post(
-    <span class="str">"https://franckate-api.onrender.com/api/encrypt"</span>,
+    <span class="str">"https://franckater-api.onrender.com/api/encrypt"</span>,
     headers={<span class="str">"X-API-Key"</span>: <span class="str">"YOUR_API_KEY"</span>},
     json={<span class="str">"text"</span>: <span class="str">"Hello World"</span>}
 )
@@ -189,7 +189,7 @@ data = response.json()
           </div>
           <div class="tab-panel" id="enc-js">
             <pre class="code-block"><span class="kw">const</span> response = <span class="kw">await</span> fetch(
-  <span class="str">"https://franckate-api.onrender.com/api/encrypt"</span>,
+  <span class="str">"https://franckater-api.onrender.com/api/encrypt"</span>,
   {
     method: <span class="str">"POST"</span>,
     headers: {
@@ -230,7 +230,7 @@ console.log(data.encrypted);</pre>
 }</pre>
           </div>
           <div class="tab-panel" id="dec-curl">
-            <pre class="code-block">curl -X POST https://franckate-api.onrender.com/api/decrypt \
+            <pre class="code-block">curl -X POST https://franckater-api.onrender.com/api/decrypt \
   -H <span class="str">"Content-Type: application/json"</span> \
   -H <span class="str">"X-API-Key: YOUR_API_KEY"</span> \
   -d <span class="str">'{"text": "U7.L4.L11.L11.L14."}'</span></pre>
